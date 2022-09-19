@@ -12,8 +12,15 @@ input.onGesture(Gesture.TiltRight, function () {
 })
 let player: game.LedSprite = null
 basic.showIcon(IconNames.Angry)
-let enemy = game.createSprite(randint(0, 5), randint(0, 5))
+game.setScore(0)
+let enemy = game.createSprite(randint(0, 10), randint(0, 10))
 player = game.createSprite(0, 0)
 basic.forever(function () {
-	
+    if (player.isTouching(enemy)) {
+        basic.showIcon(IconNames.Yes)
+        enemy.delete()
+        game.addScore(1)
+        music.playMelody("E B C5 A B G A F ", 120)
+        enemy = game.createSprite(randint(0, 10), randint(0, 10))
+    }
 })
